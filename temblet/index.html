@@ -5,36 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>forum</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: hsl(187, 62%, 95%);
-        }
-        .home {
-            text-align: right;
-            padding: 12px;
-            border-radius: 8px;
-            background: #f7f7f2;
-            box-shadow: 2px 3px 8px rgb(82, 83, 81);
-        }
-        .btn {
-            display:inline-block;
-            padding: 10px 19px;
-            margin: 10px;
-            font-size: 16px;
-            color: #ffffff;
-            background-color: #358be7;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-        .btn:hover {
-            background-color: #0051ff;
-            box-shadow: 2px 3px 8px rgb(52, 54, 48);
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: hsl(187, 62%, 95%);
+    margin: 0;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #f7f7f2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.circle {
+    position: relative;
+    width: 100px; 
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle svg {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    overflow: visible;
+    transform: rotate(-90deg); 
+}
+
+.circle svg circle {
+    fill: none;
+    stroke-width: 6;
+    stroke: #4b4b4b;
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: 251.2; 
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.circle div {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 5;
+}
+.time-text {
+    font-size: 0.6rem;
+    font-weight: 300;
+}
+
+#hh {
+    stroke: #ff2972;
+}
+
+#mm {
+    stroke: #fee800;
+}
+
+#ss {
+    stroke: #04fc43;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #358be7;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    background-color: #0051ff;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
     </style>
 </head>
 <body>
-    <div class="home">
-        <a href="login.html" class="btn">Se connecter</a>
+    <div class="header">
+        <div class="container">
+            <div class="circle" style="--color: #ff2972">
+                <svg>
+                    <circle cx="40" cy="40" r="40"></circle>
+                    <circle cx="40" cy="40" r="40" id="hh"></circle>
+                </svg>
+                <div>
+                    <p id="hrs">00</p>
+                    <p class="time-text">Hours</p>
+                </div>
+            </div>
+            <div class="circle" style="--color: #fee800">
+                <svg>
+                    <circle cx="40" cy="40" r="40"></circle>
+                    <circle cx="40" cy="40" r="40" id="mm"></circle>
+                </svg>
+                <div>
+                    <p id="mins">00</p>
+                    <p class="time-text">Minutes</p>
+                </div>
+            </div>
+            <div class="circle" style="--color: #04fc43">
+                <svg>
+                    <circle cx="40" cy="40" r="40"></circle>
+                    <circle cx="40" cy="40" r="40" id="ss"></circle>
+                </svg>
+                <div>
+                    <p id="secs">00</p>
+                    <p class="time-text">Seconds</p>
+                </div>
+            </div>
+        </div>
+        <div class="home">
+            <a href="login.html" class="btn">Se connecter</a>
+        </div>
     </div>
+    <script>
+function updateClock() {
+    const hours = document.getElementById('hrs');
+    const minutes = document.getElementById('mins');
+    const seconds = document.getElementById('secs');
+
+    const hhCircle = document.getElementById('hh');
+    const mmCircle = document.getElementById('mm');
+    const ssCircle = document.getElementById('ss');
+
+    const now = new Date();
+    let hrs = now.getHours();
+    let mins = now.getMinutes();
+    let secs = now.getSeconds();
+
+    hrs = hrs % 12 || 12;
+
+    hours.innerText = hrs.toString().padStart(2, '0');
+    minutes.innerText = mins.toString().padStart(2, '0');
+    seconds.innerText = secs.toString().padStart(2, '0');
+
+    const circumference = 251.2;
+
+    hhCircle.style.strokeDashoffset = circumference - (circumference * hrs) / 12;
+    mmCircle.style.strokeDashoffset = circumference - (circumference * mins) / 60;
+    ssCircle.style.strokeDashoffset = circumference - (circumference * secs) / 60;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+
+    </script>
+    
 </body>
 </html>
