@@ -140,3 +140,58 @@ body {
             border: 2px solid white;
             backdrop-filter: blur(20px);
         }
+        /* page ce conecter 2  */
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: hsl(187, 62%, 95%);
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            background: #f7f7f2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #17a2b8;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #117a8b;
+        }
+        /* .container {
+            display: none;
+        } */
+        /* #div1 {
+            display: none;
+        } */
+        #div1 {
+    display: none;
+        }
+        #div {
+            display: none;
+        }
