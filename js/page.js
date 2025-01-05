@@ -53,6 +53,4 @@ function updateClock() {
 
 setInterval(updateClock, 1000);
 updateClock();
-
-
-// r::lengthjmm
+// r::lengthjmmpppp
