@@ -7,7 +7,7 @@
     <title>forum</title>
 </head>
 <body>
-    <div class="header">
+    <header class="header">
         <h1 class="forum" >FORUM</h1>
         <div class="cont">
             <div class="circle" style="--color: #ff2972">
@@ -41,47 +41,53 @@
                 </div>
             </div>
         </div>
-        <div class="plus">
-            <button>+</button>
+        <div id="zidd" class="zidd">
+            <button id="zidd">+</button>
         </div>
         <div class="home">
-            <button id="button" class="btn" onclick="div1()">Se connecter</button>
+            <button id="show" class="btn">Se connecter</button>
         </div>
-    </div>
+    </header>
+
     <div class="post">
         <h2 style="text-align: center;">le posts</h2>
-        <div class="colax">
-        <div id="div" class="modal haidden">
-            <div class="container">
+        <div class="colax" id="auth" style="display: none;">
+
+        <div id="bb" class="bb">
+
+            <div id="page-logen" class="page active">
                 <h1>Se Connecter</h1>
                 <form>
                     <input type="text" placeholder="Email" required>
                     <input type="password" placeholder="password" required>
-                    <button type="submit" class="btn" id="">Connexion</button>
+                    <button type="submit" class="btn">Connexion</button>
                 </form>
-                <p>Create an account <a onclick="div2()">Inscrivez-vous ici</a></p> 
+                <p>Create an account <a onclick="togglePage()">Inscrivez-vous ici</a></p> 
             </div>
+
+                <!-- ff -->
+                
+                <div  id="cection-page" class="page">
+                    <h1>Inscription</h1>
+                    <form action="conectionn">
+                        <input type="text" placeholder="write your name" required>
+                        <input type="email" placeholder="write your email" required>
+                        <input type="password" placeholder="write your password" required>
+                        <button type="submit" id="btn" class="btn">conectionn</button>
+                        <p onclick="togglePage()">wta hna</p>
+                        <!-- <p class="">Create an account <a href="login.html">Connectez-vous ici</p> -->
+                        </form>
+                </div>
+            </div>
+
         </div>
-        </div>
-        <div class="Createconte">
-        <!-- ff -->
-         <div class="containerr" id="div1">
-            <form action="conectionn">
-                <h1>Inscription</h1>
-                <input type="text" placeholder="write your name" required>
-                <input type="email" placeholder="write your email" required>
-                <input type="password" placeholder="write your password" required>
-                <button id="botunc" class="btn">conectionn</button>
-                <!-- <p class="">Create an account <a href="login.html">Connectez-vous ici</p> -->
-            </form>
-         </div>
-        </div>
-        <div id="newpost" class="newpost">
-            <p></p>
+
+        <div id="zid" class="zid" style="display: none;">
             <input type="text" class="title" placeholder="title">
             <textarea name="post" id="addpost" placeholder="write content the post"></textarea>
         </div>
     </div>
-<script src="../js/page.js"></script>
+    <script src="../js/page.js"></script>
+      
 </body>
 </html>

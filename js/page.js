@@ -1,21 +1,29 @@
 
-// function div1()  {
-//     document.getElementById("div").style.display = "block"
-//     document.getElementById("div1").style.display = "none"
-// }
-// function div2() {
-//     document.getElementById("div").style.display = "none"
-//     document.getElementById("div1").style.display = "block"
-// }fae 
-//ikh
- function div1()  {
-    document.getElementById("div").style.display = "block"
-    document.getElementById("div1").style.display = "none"
-}
-function div2() {
-    document.getElementById("div").style.display = "none"
-    document.getElementById("div1").style.display = "block"
-}
+const zid =  document.getElementById('zidd');
+zid.addEventListener('click', () => {
+    zid.style.display = 'flex'; 
+    document.getElementById('zid').classList.add('post')
+    document.getElementById('zid').classList.remove('post')
+})
+
+const auth = document.getElementById('auth');
+const sowboton = document.getElementById('show')
+
+
+sowboton.addEventListener('click', () => {
+    auth.style.display = 'flex';
+    document.getElementById('page-logen').classList.add('active');
+    document.getElementById('cection-page').classList.remove('active');
+});
+
+function togglePage() {
+    const loginPage = document.getElementById('page-logen');
+    const seconnecterPage = document.getElementById('cection-page');
+  
+    loginPage.classList.toggle('active');
+    seconnecterPage.classList.toggle('active');
+  }
+
 function updateClock() {
     const hours = document.getElementById('hrs');
     const minutes = document.getElementById('mins');
@@ -45,4 +53,3 @@ function updateClock() {
 
 setInterval(updateClock, 1000);
 updateClock();
-//nihaya dyal sa3a

@@ -1,8 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: hsl(187, 62%, 95%);
+    background-color: hsl(185, 100%, 98%);
     margin: 0;
-    overflow: hidden;
 }
 
 .header {
@@ -10,9 +9,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: #f7f7f2;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    background: #f7f7f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .cont {
@@ -74,90 +72,13 @@ body {
     display: flex;
     align-items: center;
 }
-
-.btn {
-    display: inline-block;
-    padding: 8px 14px;
-    font-size: 12px;
-    color: #fff;
-    background-color: #358be7;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.btn:hover {
-    background-color: #0051ff;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
-}
 /* css khas b tsjil */
 
 .colax{
-            background-color: hsl(187, 62%, 95%);
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 30px;
-            border-radius: 8px;
-            background: #f7f7f2;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-                /* border: 2px solid white;
-            backdrop-filter: blur(20px); */
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #358be7;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .btn:hover {
-            background-color: #0026ff;
-        }
-        .input:hover {
-            border: 2px solid white;
-            backdrop-filter: blur(20px);
-        }
-        /* page ce conecter 2  */
-
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: hsl(187, 62%, 95%);
-        }
-        .container {
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 30px;
-            border-radius: 8px;
-            background: #f7f7f2;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
         }
         h1 {
             margin-bottom: 20px;
@@ -172,7 +93,7 @@ body {
         }
         .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding:9px 19px;
             margin: 10px;
             font-size: 16px;
             color: #fff;
@@ -181,17 +102,55 @@ body {
             border-radius: 5px;
         }
         .btn:hover {
-            background-color: #117a8b;
+            background-color: #115cff;
         }
-        /* .container {
-            display: none;
-        } */
-        /* #div1 {
-            display: none;
-        } */
-        #div1 {
-    display: none;
+        .input:hover {
+            border: 2px solid white;
+            backdrop-filter: blur(20px);
         }
-        #div {
+
+        /* page tanya  */
+        .bb {
+            position: relative;
+            width: 350px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .page {
+            background-color:#fffff9;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .page:not(.active) {
+            opacity: 0;
+            pointer-events: none;
+          }
+          .page.active {
+            opacity: 1;
+            pointer-events: auto;
+          }
+    
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #auth {
+            display: none;
+        }
+        #zid {
             display: none;
         }
