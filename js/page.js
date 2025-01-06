@@ -1,28 +1,31 @@
+const zid = document.getElementById('zidpost'); // page zid post
+const add = document.getElementById('add'); // boton +
+const auth = document.getElementById('auth'); // page kamla li fiha log in w se ..
+const sowboton = document.getElementById('show') // butun se conecter
+const loginPage = document.getElementById('page-logen'); // page login lwla
+const seconnecterPage = document.getElementById('cection-page'); // page login tanya
 
-const zid =  document.getElementById('zidd');
-zid.addEventListener('click', () => {
-    zid.style.display = 'flex'; 
-    document.getElementById('zid').classList.add('post')
-    document.getElementById('zid').classList.remove('post')
+add.addEventListener('click', () => { // byan add le post
+    zid.style.display = 'flex';
+    auth.style.display = 'none'
+    document.getElementById('zidpost').classList.add('active')
 })
 
-const auth = document.getElementById('auth');
-const sowboton = document.getElementById('show')
-
-
-sowboton.addEventListener('click', () => {
+sowboton.addEventListener('click', () => { 
     auth.style.display = 'flex';
+    zid.style.display = 'none';
     document.getElementById('page-logen').classList.add('active');
     document.getElementById('cection-page').classList.remove('active');
 });
 
 function togglePage() {
-    const loginPage = document.getElementById('page-logen');
-    const seconnecterPage = document.getElementById('cection-page');
   
     loginPage.classList.toggle('active');
     seconnecterPage.classList.toggle('active');
   }
+
+
+// page heders
 
 function updateClock() {
     const hours = document.getElementById('hrs');

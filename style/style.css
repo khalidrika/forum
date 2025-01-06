@@ -1,25 +1,32 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: hsl(185, 100%, 98%);
+    background-color: hsl(185, 75%, 97%);
     margin: 0;
+    padding: 0;
 }
 
 .header {
     display: flex;
+    background-color: #4a90e2;
+    color: white;
+    /* text-align: center; */
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background: #f7f7f0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
 }
-
+.header .forum {
+    font-size: 2rem;
+    margin: 0;
+}
 .cont {
     display: flex;
+    justify-content: center;
     gap: 4px;
     align-items: center;
 }
 
 .circle {
+    text-align: center;
     position: relative;
     width: 100px; 
     height: 100px;
@@ -30,7 +37,7 @@ body {
 
 .circle svg {
     position: absolute;
-    width: 100%;
+    width: 80%;
     height: 80%;
     overflow: visible;
     transform: rotate(-90deg); 
@@ -45,17 +52,38 @@ body {
     transition: stroke-dashoffset 1s ease-in-out;
 }
 
-.circle div {
+/* .circle div {
     text-align: center;
     font-size: 0.8rem;
     font-weight: bold;
     z-index: 5;
-}
+} */
 .time-text {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 300;
 }
+.zidd {
+    text-align: center;
+    margin-top: 10px;
 
+}
+.zidd button {
+    position: fixed;
+     bottom: 30px;
+    right: 28px; 
+    bottom: 30px;
+    right: 28px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    border-radius: 19px;
+    cursor: pointer;
+}
+.zidd button:hover {
+    background-color: #1c5c8c;
+}
 #hh {
     stroke: #ff2972;
 }
@@ -69,16 +97,36 @@ body {
 }
 
 .home {
+    text-align: center;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
 }
-/* css khas b tsjil */
 
+.home .btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+
+/* css khas b tsjil */
+.post {
+    background-color: #ffffff;
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.post h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
 .colax{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 70vh;
         }
         h1 {
             margin-bottom: 20px;
@@ -92,6 +140,7 @@ body {
             border-radius: 5px;
         }
         .btn {
+            border: none;
             display: inline-block;
             padding:9px 19px;
             margin: 10px;
@@ -102,7 +151,7 @@ body {
             border-radius: 5px;
         }
         .btn:hover {
-            background-color: #115cff;
+            background-color: #1c5c8c;
         }
         .input:hover {
             border: 2px solid white;
@@ -119,9 +168,8 @@ body {
             background: #fff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        
         .page {
-            background-color:#fffff9;
+            background-color:#ffffff;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -151,6 +199,79 @@ body {
         #auth {
             display: none;
         }
-        #zid {
-            display: none;
+        @media (max-width: 600px) {
+            .cont {
+                flex-direction: column;
+            }
+            .circle {
+                margin-bottom: 0px;
+            }
         }
+        /* POST  */
+#zidpost {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#zidpost .title {
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#zidpost textarea {
+    width: 100%;
+    height: 150px;
+    padding: 9px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#zidpost textarea:focus {
+    border-color: #4a90e2;
+}
+
+#zidpost .submit {
+    border: none;
+    display: inline-block;
+    padding:9px 19px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #17a2b8;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#zidpost .submit:hover {
+    background-color: #1c5c8c;
+}
+
+#zidpost .title::placeholder,
+#zidpost textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    #zidpost {
+        width: 95%;
+        padding: 15px;
+    }
+}

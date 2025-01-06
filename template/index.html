@@ -42,7 +42,7 @@
             </div>
         </div>
         <div id="zidd" class="zidd">
-            <button id="zidd">+</button>
+            <button id="add">+</button>
         </div>
         <div class="home">
             <button id="show" class="btn">Se connecter</button>
@@ -51,6 +51,7 @@
 
     <div class="post">
         <h2 style="text-align: center;">le posts</h2>
+    </div>
         <div class="colax" id="auth" style="display: none;">
 
         <div id="bb" class="bb">
@@ -62,7 +63,7 @@
                     <input type="password" placeholder="password" required>
                     <button type="submit" class="btn">Connexion</button>
                 </form>
-                <p>Create an account <a onclick="togglePage()">Inscrivez-vous ici</a></p> 
+                <p>Create an account <a  href="#" onclick="togglePage()">Inscrivez-vous ici</a></p> 
             </div>
 
                 <!-- ff -->
@@ -74,7 +75,7 @@
                         <input type="email" placeholder="write your email" required>
                         <input type="password" placeholder="write your password" required>
                         <button type="submit" id="btn" class="btn">conectionn</button>
-                        <p onclick="togglePage()">wta hna</p>
+                        <p> <a href="#" onclick="togglePage()" >wta hna</p>
                         <!-- <p class="">Create an account <a href="login.html">Connectez-vous ici</p> -->
                         </form>
                 </div>
@@ -82,11 +83,12 @@
 
         </div>
 
-        <div id="zid" class="zid" style="display: none;">
+        <div id="zidpost" class="post" style="display: none;">
             <input type="text" class="title" placeholder="title">
             <textarea name="post" id="addpost" placeholder="write content the post"></textarea>
+            <button id="submit" class="submit">submit</button>
         </div>
-    </div>
+
     <script src="../js/page.js"></script>
       
 </body>
