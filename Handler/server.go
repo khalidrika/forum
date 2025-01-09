@@ -1,9 +1,8 @@
 package create
 
 func Run() {
-
+	Handlerconection()
 }
-
 
 // db := ip.ToEquipdb()
 // defer db.Close()
