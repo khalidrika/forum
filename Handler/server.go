@@ -23,7 +23,7 @@ func Initialise() bool {
 }
 
 func Initialiseport() bool {
-	portt := flag.Bool("print-port", false, "print a random avilable portand exit")
+	portt := flag.Bool("print-port", false, "print a random avilable portand and exit")
 	flag.Parse()
 	if *portt {
 		lidtner, err := net.Listen("tcp", ":0")
