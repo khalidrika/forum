@@ -38,6 +38,7 @@ func Initialiseport() bool {
 	return false
 }
 
+// cc
 // db := ip.ToEquipdb()
 // defer db.Close()
 // http.HandleFunc("/", ip.Homehandler)
