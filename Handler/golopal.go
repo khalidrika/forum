@@ -7,11 +7,11 @@ import (
 var (
 	port  ports
 	DB    *sql.DB
-	liink link
+	liink *link
 )
 
 type link struct {
-	errorpage string `json:"error`
+	Errorpage string `json:"error`
 }
 
 type ports struct {
