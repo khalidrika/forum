@@ -6,4 +6,5 @@ import (
 
 func main() {
 	ip.Run()
+	ip.DB.Close()
 }

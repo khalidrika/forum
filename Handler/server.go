@@ -8,6 +8,8 @@ import (
 	"log"
 	"net"
 	"os"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Run() {
@@ -22,13 +24,13 @@ func Initialise() bool {
 	if InitialisePort() {
 		return false
 	}
-	IinialeseLink()
+	InitialiseLink()
 	InitialiseDB()
 	return true
 }
 
 func InitialisePort() bool {
-	port := flag.Bool("print-port", false, "print a random avilable portand and exit")
+	port := flag.Bool("print-port", false, "print a random available port and exit")
 	flag.Parse()
 	if *port {
 		listner, err := net.Listen("tcp", ":0")
@@ -43,8 +45,8 @@ func InitialisePort() bool {
 	return false
 }
 
-func IinialeseLink() {
-	cont, err := os.ReadFile("./json/cold.json")
+func InitialiseLink() {
+	cont, err := os.ReadFile("./json/clod.json")
 	if err != nil {
 		log.Printf("failde to red clod.json:%v\n", err)
 		return
@@ -63,14 +65,18 @@ func InitialiseDB() {
 	var err error
 	DB, err = sql.Open("sqlite3", "./database/database.db")
 	if err != nil {
-		log.Fatal("failde open to sqlt3 database:%v\n", err)
+		log.Fatal("failde open to sqlt3 database: \n", err)
 	}
 	if err = DB.Ping(); err != nil {
-		log.Fatal("failde", err)
+		log.Fatal("failed", err)
 	}
 	conten, err := os.ReadFile("./database/sqlt.sql")
 	if err != nil {
-		log.Fatal("failde to read dfile sqlt", err)
+		log.Fatal("failde to read dfile sqlite", err)
 		fmt.Println(conten)
+	}
+
+	if _, err := DB.Exec(string(conten)); err != nil {
+		log.Fatal("Failed to create database tables:", err)
 	}
 }
