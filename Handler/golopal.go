@@ -10,5 +10,5 @@ var (
 )
 
 type link struct {
-	Errorpage string `json:"error"`
+	Errorpage string `json:"error"`	
 }

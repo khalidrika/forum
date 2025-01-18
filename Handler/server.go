@@ -16,8 +16,6 @@ func Run() {
 	if !Initialise() {
 		return
 	}
-	// port.Getport()
-	// Inilink()
 }
 
 func Initialise() bool {
@@ -73,10 +71,10 @@ func InitialiseDB() {
 	conten, err := os.ReadFile("./database/sqlt.sql")
 	if err != nil {
 		log.Fatal("failde to read dfile sqlite", err)
-		fmt.Println(conten)
 	}
 
 	if _, err := DB.Exec(string(conten)); err != nil {
 		log.Fatal("Failed to create database tables:", err)
 	}
 }
+	
