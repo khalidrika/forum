@@ -1,18 +1,19 @@
 package create
 
 import (
+	"bytes"
 	"html/template"
 	"net/http"
 	"strings"
 )
 
-func Homehandler(w http.ResponseWriter, r http.Request) {
+func Homehandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		Erorhandler(w, 404, "page not fande")
+		Errorhandler(w, 404, "page not fande", "looks like youre lost!")
 		return
 	}
 	if r.Method != http.MethodGet {
-		Erorhandler(w, 405, "method not alowd")
+		Errorhandler(w, 405, "method not allowd", "Only GET method is allowd!")
 		return
 	}
 	ParseAndEx(w, "", "./template/index.html")
@@ -25,5 +26,17 @@ func ParseAndEx(w http.ResponseWriter, data any, filename string) {
 			ServClodeEroor(w, data.(EroorData), err)
 			return
 		}
+		Errorhandler(w, 500, "Internel Server Error", "Somthing seems wrong, try again later")
+		return
 	}
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, data); err != nil {
+		if strings.HasPrefix(filename, "error.html") {
+			ServClodeEroor(w, data.(EroorData), err)
+			return
+		}
+		Errorhandler(w, 500, "Internal Server Error", "Somthing seems worng, try again leter")
+		return
+	}
+	buf.WriteTo(w)
 }

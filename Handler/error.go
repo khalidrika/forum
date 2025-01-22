@@ -15,7 +15,7 @@ type EroorData struct {
 	statusCode int
 }
 
-func Erorhandler(w http.ResponseWriter, code int, misage string) {
+func Errorhandler(w http.ResponseWriter, code int, msg1 string, msg2 string) {
 }
 
 func ServClodeEroor(w http.ResponseWriter, errD EroorData, err error) {
@@ -29,6 +29,10 @@ func ServClodeEroor(w http.ResponseWriter, errD EroorData, err error) {
 	errBody = strings.ReplaceAll(errBody, "{{.Msg1}}", errD.Msg1)
 	errBody = strings.ReplaceAll(errBody, "{{.Msg2}}", errD.Msg2)
 	errBody = strings.ReplaceAll(errBody, "{{.StatusCode}}", strconv.Itoa(errD.statusCode))
+	if errD.statusCode == 500 {
+		errBody = strings.ReplaceAll(errBody, `<a href="/"><button class="submit">Go to Home>`, "")
+	}
+	w.Write([]byte(errBody))
 }
 
 func GetEroorPage() (string, error) {
