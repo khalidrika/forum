@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -17,15 +18,17 @@ type EroorData struct {
 func Erorhandler(w http.ResponseWriter, code int, misage string) {
 }
 
-func ServClodeEroor(w http.ResponseWriter, error EroorData, err error) {
+func ServClodeEroor(w http.ResponseWriter, errD EroorData, err error) {
 	log.Println(err)
 	errBody, err := GetEroorPage()
 	if err != nil {
-		http.Error(w, http.StatusText(error.statusCode), error.statusCode)
+		http.Error(w, http.StatusText(errD.statusCode), errD.statusCode)
 		log.Println(err)
 		return
 	}
-	errBody = strings.Replace(errBody, "{{.Msg1}}", error.Msg1)
+	errBody = strings.ReplaceAll(errBody, "{{.Msg1}}", errD.Msg1)
+	errBody = strings.ReplaceAll(errBody, "{{.Msg2}}", errD.Msg2)
+	errBody = strings.ReplaceAll(errBody, "{{.StatusCode}}", strconv.Itoa(errD.statusCode))
 }
 
 func GetEroorPage() (string, error) {
