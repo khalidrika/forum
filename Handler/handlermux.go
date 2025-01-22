@@ -3,6 +3,7 @@ package create
 import (
 	"html/template"
 	"net/http"
+	"strings"
 )
 
 func Homehandler(w http.ResponseWriter, r http.Request) {
@@ -14,13 +15,15 @@ func Homehandler(w http.ResponseWriter, r http.Request) {
 		Erorhandler(w, 405, "method not alowd")
 		return
 	}
-	Parsehome(w, "", "./template/index.html")
+	ParseAndEx(w, "", "./template/index.html")
 }
 
-func Parsehome(w http.ResponseWriter, data any, filename string) {
+func ParseAndEx(w http.ResponseWriter, data any, filename string) {
 	tmpl, err := template.ParseFiles(filename)
-    if err != nil {
-        
-        
-    }
+	if err != nil {
+		if strings.HasPrefix(filename, "error.html") {
+			ServClodeEroor(w, data.(EroorData), err)
+			return
+		}
+	}
 }
