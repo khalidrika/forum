@@ -1,6 +1,7 @@
 package create
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"net"
@@ -20,7 +21,30 @@ func Startserver() {
 func Start() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", Homehandler)
+	mux.HandleFunc("/style/", ServeFile)
+	mux.HandleFunc("/js/", ServeJS)
 	return mux
+}
+
+func ServeJS(w http.ResponseWriter, r *http.Request) {
+	fileJS := "." + r.URL.Path
+	filejs, err := os.ReadFile(fileJS)
+	if err != nil {
+		Errorhandler(w, http.StatusForbidden, http.StatusText(http.StatusForbidden), "error")
+		return
+	}
+	http.ServeContent(w, r, fileJS, time.Now(), bytes.NewReader(filejs))
+}
+
+func ServeFile(w http.ResponseWriter, r *http.Request) {
+	style := "." + r.URL.Path
+
+	file, err := os.Open(style)
+	if err != nil {
+		http.Error(w, "faiulde to open file style", 404)
+		return
+	}
+	http.ServeContent(w, r, file.Name(), time.Now(), file)
 }
 
 func Serv(handler http.Handler, port int) error {
