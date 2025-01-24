@@ -15,7 +15,6 @@ body {
     padding: 10px 0;
 }
 .header .forum {
-    font-size: 2rem;
     margin: 0;
 }
 .cont {
@@ -128,9 +127,6 @@ body {
     align-items: center;
     height: 70vh;
         }
-        h1 {
-            margin-bottom: 20px;
-        }
         input {
             display: block;
             margin: 10px auto;
@@ -184,10 +180,6 @@ body {
             opacity: 1;
             pointer-events: auto;
           }
-    
-        h1 {
-            margin-bottom: 20px;
-        }
         input {
             display: block;
             margin: 10px auto;
