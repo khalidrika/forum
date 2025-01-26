@@ -40,3 +40,22 @@ func ParseAndEx(w http.ResponseWriter, data any, filename string) {
 	}
 	buf.WriteTo(w)
 }
+
+
+
+
+
+
+
+
+
+// func AddPost(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodPost {
+// 		Errorhandler(w, 404, "page not fand", "looke like your lost")
+// 		return
+// 	}
+// 	userID := r.Header.Get("User-ID")
+// 	if  userID == "" {
+// 		http.Error(w, )
+// 	}
+// }

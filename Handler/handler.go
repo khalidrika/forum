@@ -2,13 +2,55 @@ package create
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
+
+type User struct {
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+// path for login in ueser
+func RegisterHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		Errorhandler(w, http.StatusMethodNotAllowed, "Method Not Allowd", "Only Post Allowd Method ")
+		return
+	}
+	var user User
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid request body")
+		return
+	}
+	if user.Email == "" || user.Username == "" || user.Password == "" {
+		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid server ere request")
+		return
+	}
+	fmt.Println(user)
+	// hash password
+	hashengPasswor, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		Errorhandler(w, http.StatusInternalServerError, "Internel server error", "filde to hash password")
+		return
+	}
+	// memorese user from database
+	query := `INSERT INTO user (email, username, paswword, created_at) VALUES (?, ?, ?, ?)`
+	_, err = DB.Exec(query, user.Email, user.Username, string(hashengPasswor), time.Now())
+	if err != nil {
+		Errorhandler(w, http.StatusConflict, "Conflicet", "Email or Username aleady exists")
+		return
+	}
+	w.WriteHeader(http.StatusAccepted)
+	w.Write([]byte("user registered successfully"))
+}
 
 func ServeJS(w http.ResponseWriter, r *http.Request) {
 	fileJS := "." + r.URL.Path

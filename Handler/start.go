@@ -18,12 +18,6 @@ func Start() http.Handler {
 	mux.HandleFunc("/", Homehandler)
 	mux.HandleFunc("/style/", ServeFile)
 	mux.HandleFunc("/js/", ServeJS)
-	mux.HandleFunc("javascrebt", Handledd)
-	mux.HandleFunc("time", Handledd)
-
-	// mux.HandleFunc("img", ServeFile)
+	mux.HandleFunc("/register", RegisterHandler)
 	return mux
-}
-
-func Handledd(w http.ResponseWriter, r *http.Request) {
 }
