@@ -27,10 +27,12 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var user User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		log.Println("error decodinig respos body ", err)
 		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid request body")
 		return
 	}
 	if user.Email == "" || user.Username == "" || user.Password == "" {
+		log.Println("masing requerd failds")
 		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid server ere request")
 		return
 	}
@@ -38,6 +40,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	// hash password
 	hashengPasswor, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
+		log.Println("failde to hashing password", err)
 		Errorhandler(w, http.StatusInternalServerError, "Internel server error", "filde to hash password")
 		return
 	}
@@ -45,12 +48,16 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	query := `INSERT INTO user (email, username, paswword, created_at) VALUES (?, ?, ?, ?)`
 	_, err = DB.Exec(query, user.Email, user.Username, string(hashengPasswor), time.Now())
 	if err != nil {
+		log.Println("error isiting user to database", err)
 		Errorhandler(w, http.StatusConflict, "Conflicet", "Email or Username aleady exists")
 		return
 	}
+	log.Println("tam tasjil", user.Email)
 	w.WriteHeader(http.StatusAccepted)
 	w.Write([]byte("user registered successfully"))
 }
+
+// final
 
 func ServeJS(w http.ResponseWriter, r *http.Request) {
 	fileJS := "." + r.URL.Path
