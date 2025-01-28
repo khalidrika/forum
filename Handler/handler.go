@@ -27,10 +27,12 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var user User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		log.Println("error decodinig respos body ", err)
+		log.Println("Error decoding request body:", err)
 		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid request body")
 		return
 	}
+	log.Println("Decoded User: %+v\n", user)
+
 	if user.Email == "" || user.Username == "" || user.Password == "" {
 		log.Println("masing requerd failds")
 		Errorhandler(w, http.StatusBadRequest, "Bad Request", "Invalid server ere request")
@@ -45,7 +47,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// memorese user from database
-	query := `INSERT INTO user (email, username, paswword, created_at) VALUES (?, ?, ?, ?)`
+	query := `INSERT INTO users (email, username, password, created_at) VALUES (?, ?, ?, ?)`
 	_, err = DB.Exec(query, user.Email, user.Username, string(hashengPasswor), time.Now())
 	if err != nil {
 		log.Println("error isiting user to database", err)
