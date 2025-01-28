@@ -19,5 +19,6 @@ func Start() http.Handler {
 	mux.HandleFunc("/style/", ServeFile)
 	mux.HandleFunc("/js/", ServeJS)
 	mux.HandleFunc("/register", RegisterHandler)
+	log.Println(mux)
 	return mux
 }
