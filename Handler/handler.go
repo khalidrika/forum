@@ -19,6 +19,11 @@ type User struct {
 	Password string `json:"password"`
 }
 
+// type LoginRequest struct {
+// 	Email   string `json:"email"`
+// 	Passwor string `json:"password"`
+// }
+
 // path for login in ueser
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -61,6 +66,59 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 
 // final
 
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		log.Println("method not allowd post")
+		Errorhandler(w, http.StatusMethodNotAllowed, "MEthod not allowd", "the post is method allowd")
+		return
+	}
+	var user User
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		log.Println("error decoding request body", err)
+		Errorhandler(w, http.StatusBadRequest, "bd request", "invalid request body")
+		return
+	}
+	if user.Password == "" || user.Username == "" {
+		log.Println("mazing email or password")
+		Errorhandler(w, http.StatusBadRequest, "bad request", "email or password a empty")
+		return
+	}
+	var dbpassword string
+	var userID int
+
+	err := DB.QueryRow("SELECT id, password FROM users WHERE email = ?", user.Email).Scan(&userID, &dbpassword)
+	if err != nil {
+		log.Println("error fetchrng user:", err)
+		Errorhandler(w, http.StatusUnauthorized, "Unauthorized", "Invalid email or password")
+		return
+	}
+	err = bcrypt.CompareHashAndPassword([]byte(dbpassword), []byte(user.Password))
+	if err != nil {
+		log.Println("invalid pwor for user:", user.Email)
+		Errorhandler(w, http.StatusUnauthorized, "Unauthorized", "Invalid email or password")
+		return
+	}
+	token := generateToken()
+
+	exported := time.Now().Add(24 * time.Hour)
+	_, err = DB.Exec("INSERT INTO sessions (user_id, token, expires_at) VALUES (?, ?, ?, ?)", userID, token, exported)
+	if err != nil {
+		log.Println("error creting sessions:", err)
+		Errorhandler(w, http.StatusInternalServerError, "Internal server error", "failde to creting sessions")
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{
+		"message": "Login successful",
+		"token":   token,
+	})
+}
+
+func generateToken() string {
+	return fmt.Sprintf("%x", time.Now().UnixNano())
+}
+
+// start
 func ServeJS(w http.ResponseWriter, r *http.Request) {
 	fileJS := "." + r.URL.Path
 	filejs, err := os.ReadFile(fileJS)
