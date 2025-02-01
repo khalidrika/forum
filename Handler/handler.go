@@ -162,3 +162,62 @@ func Serv(handler http.Handler, port int) error {
 	log.Printf("starting server on http://localhost:%d", listner.Addr().(*net.TCPAddr).Port)
 	return server.Serve(listner)
 }
+
+// func GetPostsHandler(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodGet {
+// 		JsonError(w, "Method not allowed", http.StatusMethodNotAllowed, nil)
+// 		return
+// 	}
+
+// 	offset, err := strconv.Atoi(r.URL.Query().Get("offset"))
+// 	if err != nil {
+// 		JsonError(w, "Bad request", http.StatusBadRequest, err)
+// 		return
+// 	}
+// 	tagsParam := r.URL.Query().Get("tags")
+
+// 	var posts []Post
+
+// 	if tagsParam == "" {
+// 		// No filter => return all posts
+// 		posts, err = FetchAllPosts(offset)
+// 	} else {
+// 		rawTags := strings.Split(tagsParam, ",")
+// 		var tags []string
+// 		for _, t := range rawTags {
+// 			trimmed := strings.TrimSpace(t)
+// 			if trimmed != "" {
+// 				tags = append(tags, strings.ToLower(trimmed))
+// 			}
+// 		}
+// 		if len(tags) == 0 {
+// 			posts, err = FetchAllPosts(offset)
+// 		} else {
+// 			posts, err = FetchPostsByTags(offset, tags)
+// 		}
+// 	}
+
+// 	if err != nil {
+// 		JsonError(w, "Failed to query posts: "+err.Error(), http.StatusInternalServerError, err)
+// 		return
+// 	}
+
+// 	w.Header().Set("Content-Type", "application/json")
+// 	json.NewEncoder(w).Encode(posts)
+// }
+
+// // Returns all posts (10 limit, offset)
+// func FetchAllPosts(offset int) ([]Post, error) {
+// 	rows, err := DB.Query(`
+//         SELECT p.id, p.user_id, p.title, p.content, p.created_at, u.username
+//         FROM posts p
+//         JOIN users u ON p.user_id = u.id
+//         ORDER BY p.id DESC
+//         LIMIT 10 OFFSET ?`, offset)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	defer rows.Close()
+
+// 	return ScanRows(rows)
+// }
