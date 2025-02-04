@@ -9,4 +9,5 @@ func Run() {
 		return
 	}
 	Startserver()
+	return
 }
